@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTsearch from 'youtube-api-search';
@@ -35,6 +36,8 @@ videoSearch(term){ // 유튜브 검색을 리펙토링하여 하나의 메소드
 }
 
   render() {
+    const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
+
     return (
       <div>
         <SearchBar onSearchTermChange={term => this.videoSearch(term)}/> 
