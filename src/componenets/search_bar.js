@@ -11,7 +11,7 @@ class SearchBar extends Component {
         return (
             <div className="search-bar">
             <input 
-            value = {this.state.term}
+            value = {this.state.term} // 제어 컴포넌트
             onChange={event => this.onInputChange(event.target.value)}  // onInputChange와 새 인풋값을 호출함
             />
             </div>

@@ -8,16 +8,13 @@ import VideoDetail from './componenets/video_detail';
 
 const API_KEY = 'AIzaSyCpNmknKlReIaS2v8mVfsY6SS9gHS81nIQ';
 
-
-
 // Create a new component. This componenet should produce
 // some HTML
 
-class App extends Component {
+class App extends Component { // 클래스 기반의 컴포넌트
 constructor(props){
   super(props);
-
-  this.state = { 
+  this.state = { // 초기 state 값을 할당
     videos: [],
     selectedVideo: null
   };
@@ -27,11 +24,12 @@ constructor(props){
 }
 
 videoSearch(term){ // 유튜브 검색을 리펙토링하여 하나의 메소드로 만듦
-  YTsearch({key: API_KEY, term: term}, (videos) => { // 하나의 검색어를 가짐
+  console.log("term의 기능:", term)
+  YTsearch({key: API_KEY, term /*term: term*/ }, (videos) => { // 하나의 검색어를 가짐
     this.setState({
-      videos: videos,
+      videos, // videos: videos
       selectedVideo: videos[0]
-    }); // this.setState({videos: videos});
+    });
   });
 }
 
@@ -40,7 +38,7 @@ videoSearch(term){ // 유튜브 검색을 리펙토링하여 하나의 메소드
 
     return (
       <div>
-        <SearchBar onSearchTermChange={term => this.videoSearch(term)}/> 
+        <SearchBar onSearchTermChange={videoSearch}/>  
         <VideoDetail video={this.state.selectedVideo}/>
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo})}
@@ -54,5 +52,5 @@ videoSearch(term){ // 유튜브 검색을 리펙토링하여 하나의 메소드
 
 // Take this componenet's generated HTML and put it
 // on the page (in the DOM)
-ReactDOM.render(<App/>, document.querySelector('.container'));
+ReactDOM.render(<App/>, document.querySelector('.container')); // index.html의 body 부분의 div class명 .container 부분 선택해서 렌더링
 
